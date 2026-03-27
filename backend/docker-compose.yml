@@ -15,6 +15,16 @@ services:
       - influxdb
       - redis
 
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+    container_name: rms-frontend
+    ports:
+      - '5173:80'
+    depends_on:
+      - backend
+
   postgres:
     image: postgres:16
     container_name: rms-postgres
