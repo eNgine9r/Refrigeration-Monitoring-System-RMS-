@@ -30,7 +30,7 @@ export function ControllersPage() {
         <div className="rounded-2xl border border-slate-700 bg-black p-6 text-center">
           <p className="mb-2 text-xs uppercase tracking-wider text-slate-500">Temperature Display</p>
           <p className="font-mono text-5xl text-emerald-400">{Number(sample?.latest_values?.temperature ?? -18).toFixed(1)}°C</p>
-          <p className="mt-2 text-sm text-slate-400">Setpoint: {sample?.latest_values?.setpoint ?? -18}°C</p>
+          <p className="mt-2 text-sm text-slate-400">Setpoint: {Number(sample?.latest_values?.setpoint ?? -18).toFixed(1)}°C</p>
         </div>
       </Card>
 
@@ -44,7 +44,7 @@ export function ControllersPage() {
         </div>
 
         {tab === 'overview' && <p className="text-sm text-slate-300">Compressor state, fan state and defrost schedule are currently healthy for {controllerDevices.length} linked devices.</p>}
-        {tab === 'parameters' && <p className="text-sm text-slate-300">Realtime setpoint: {sample?.latest_values?.setpoint ?? -18}°C · Differential: 2.0°C · Anti-short-cycle: 180s.</p>}
+        {tab === 'parameters' && <p className="text-sm text-slate-300">Realtime setpoint: {Number(sample?.latest_values?.setpoint ?? -18).toFixed(1)}°C · Differential: 2.0°C · Anti-short-cycle: 180s.</p>}
         {tab === 'io' && <p className="text-sm text-slate-300">Digital Input 1: Door Closed · Relay 1: Compressor ON · Relay 2: Defrost OFF.</p>}
         {tab === 'alarms' && <p className="text-sm text-slate-300">No critical controller-level alarms at this moment. Historical events are available in Alarm Center.</p>}
       </Card>

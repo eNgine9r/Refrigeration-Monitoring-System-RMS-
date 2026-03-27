@@ -1,7 +1,8 @@
+import type { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 
 type Props = {
-  children: string;
+  children: ReactNode;
   variant?: 'success' | 'warning' | 'danger' | 'neutral';
 };
 
