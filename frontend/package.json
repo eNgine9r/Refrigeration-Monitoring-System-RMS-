@@ -29,5 +29,6 @@
     "tailwindcss": "^3.4.17",
     "typescript": "^5.7.3",
     "vite": "^6.2.0"
-  }
+  },
+  "homepage": "https://engine9r.github.io/Refrigeration-Monitoring-System-RMS-/"
 }

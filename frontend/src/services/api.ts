@@ -3,7 +3,8 @@ import { mockApi } from '@/services/mockApi';
 import type { Alarm, Device, DeviceLatest, HistoryPoint, LoginPayload, LoginResponse } from '@/types/api';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8000/api/v1';
-export const API_MODE = (import.meta.env.VITE_API_MODE ?? 'mock') as 'mock' | 'live';
+const requestedMode = (import.meta.env.VITE_API_MODE ?? 'mock') as 'mock' | 'live';
+export const API_MODE: 'mock' | 'live' = import.meta.env.PROD ? 'mock' : requestedMode;
 
 const liveApi = axios.create({
   baseURL: API_BASE_URL,
