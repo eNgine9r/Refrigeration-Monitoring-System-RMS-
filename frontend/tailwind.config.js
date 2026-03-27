@@ -5,14 +5,21 @@ export default {
   theme: {
     extend: {
       colors: {
-        border: 'rgb(226 232 240)',
-        background: 'rgb(248 250 252)',
+        app: {
+          bg: '#0f172a',
+          card: '#111827',
+          primary: '#3b82f6',
+          success: '#22c55e',
+          warning: '#f59e0b',
+          danger: '#ef4444',
+        },
       },
       boxShadow: {
-        card: '0 10px 30px rgba(15, 23, 42, 0.08)',
+        card: '0 16px 30px rgba(2,6,23,0.35)',
       },
       borderRadius: {
-        '2xl': '1rem',
+        xl: '1rem',
+        '2xl': '1.25rem',
       },
     },
   },

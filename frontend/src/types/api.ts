@@ -1,6 +1,10 @@
+export type DeviceStatus = 'online' | 'offline' | 'alarm';
+
 export type Device = {
   id: number;
   name: string;
+  location: string;
+  controller_model: 'Carel iJF' | 'Dixell XR60' | 'Eliwell IDPlus';
   protocol: 'rtu' | 'tcp';
   host: string | null;
   port: number | null;
@@ -12,6 +16,7 @@ export type Device = {
   high_temp_threshold: number | null;
   low_temp_threshold: number | null;
   latest_values: Record<string, unknown> | null;
+  status: DeviceStatus;
   last_seen_at: string | null;
 };
 

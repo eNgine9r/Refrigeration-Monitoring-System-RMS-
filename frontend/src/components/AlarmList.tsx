@@ -1,23 +1,26 @@
+import type { Alarm } from '@/types/api';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import type { Alarm } from '@/types/api';
+import { Button } from '@/components/ui/button';
 
-export function AlarmList({ alarms }: { alarms: Alarm[] }) {
+export function AlarmList({ alarms, onAcknowledge }: { alarms: Alarm[]; onAcknowledge: (alarmId: number) => void }) {
   return (
     <Card>
-      <div className="mb-3 flex items-center justify-between">
+      <div className="mb-4 flex items-center justify-between">
         <h3 className="text-base font-semibold">Active Alarms</h3>
-        <span className="text-xs text-slate-500">{alarms.length} alarms</span>
+        <span className="text-xs text-slate-400">{alarms.length} active</span>
       </div>
       <div className="space-y-3">
-        {alarms.length === 0 ? <p className="text-sm text-slate-500">No active alarms.</p> : null}
         {alarms.map((alarm) => (
-          <div key={alarm.id} className="flex items-center justify-between rounded-xl border border-slate-200 p-3 dark:border-slate-700">
-            <div>
+          <div key={alarm.id} className="rounded-xl border border-slate-700 bg-slate-800/40 p-3">
+            <div className="mb-2 flex items-center justify-between">
               <p className="text-sm font-medium">{alarm.message}</p>
-              <p className="text-xs text-slate-500">Device #{alarm.device_id}</p>
+              <Badge variant={alarm.severity >= 3 ? 'danger' : 'warning'}>P{alarm.severity}</Badge>
             </div>
-            <Badge variant={alarm.severity >= 3 ? 'danger' : 'warning'}>P{alarm.severity}</Badge>
+            <p className="mb-3 text-xs text-slate-400">Device #{alarm.device_id}</p>
+            <Button variant="secondary" className="w-full" onClick={() => onAcknowledge(alarm.id)}>
+              Acknowledge
+            </Button>
           </div>
         ))}
       </div>

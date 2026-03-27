@@ -12,9 +12,7 @@ const liveApi = axios.create({
 
 liveApi.interceptors.request.use((config) => {
   const token = localStorage.getItem('rms_token');
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
+  if (token) config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
 
@@ -46,6 +44,10 @@ export const devicesApi = {
     if (API_MODE === 'mock') return mockApi.writeRegister(id, register, value);
     await liveApi.post(`/devices/${id}/write`, { register, value });
   },
+  async action(id: number, action: 'on' | 'off' | 'defrost' | 'reset_alarm'): Promise<void> {
+    if (API_MODE === 'mock') return mockApi.controllerAction(id, action);
+    await liveApi.post(`/devices/${id}/write`, { register: 999, value: 1 });
+  },
 };
 
 export const alarmsApi = {
@@ -58,5 +60,11 @@ export const alarmsApi = {
     if (API_MODE === 'mock') return mockApi.listActiveAlarms();
     const { data } = await liveApi.get<Alarm[]>('/alarms/active');
     return data;
+  },
+  async acknowledge(alarmId: number): Promise<void> {
+    if (API_MODE === 'mock') return mockApi.acknowledgeAlarm(alarmId);
+  },
+  async resolve(alarmId: number): Promise<void> {
+    if (API_MODE === 'mock') return mockApi.resolveAlarm(alarmId);
   },
 };

@@ -1,11 +1,25 @@
-# RMS Frontend Demo
+# ColdChain Control Frontend
 
-This frontend supports two modes:
+Modern SaaS-style SCADA UI for refrigeration monitoring.
 
-- `mock` (default): fully functional demo without backend
-- `live`: real backend integration via FastAPI
+## Features
 
-## Local demo run (no backend needed)
+- Dark-mode-first design system
+- Dashboard with KPI cards, trend overlays, alarm panel, device status grid
+- Devices page with table/grid toggle, search, filter, sorting
+- Rich Device Detail with 24h/7d chart, parameters, control panel, alarm history
+- Controller simulator page (Carel / Dixell / Eliwell style)
+- Alarms center with filters and detail modal actions
+- Analytics page (comparison + alarm frequency)
+- Locations page (multi-store scaling)
+- Settings page (users + system + API mode)
+
+## Modes
+
+- `mock` (default): works without backend/devices
+- `live`: connects to FastAPI backend
+
+## Run demo locally
 
 ```bash
 cp .env.example .env
@@ -14,34 +28,20 @@ npm run build
 npm run preview
 ```
 
-Default demo credentials:
+Demo credentials: `demo` / `demo`
 
-- username: `demo`
-- password: `demo`
+## Deploy to GitHub Pages
 
-## Live mode
-
-Set in `.env`:
-
-```bash
-VITE_API_MODE=live
-VITE_API_BASE_URL=http://localhost:8000/api/v1
-```
-
-## GitHub Pages deployment
-
-1. Set base path (repo name):
+1. Set base path in `.env`:
 
 ```bash
 VITE_BASE_PATH=/YOUR_REPOSITORY_NAME/
 ```
 
-2. Build static output:
+2. Build:
 
 ```bash
 npm run build
 ```
 
-3. Publish `dist/` using GitHub Pages (Actions or `gh-pages` branch).
-
-If using GitHub Actions, upload `dist` as Pages artifact.
+3. Publish the generated `dist/` directory with GitHub Pages.

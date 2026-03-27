@@ -2,19 +2,19 @@ import type { ReactElement } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { MainLayout } from '@/layouts/MainLayout';
 import { AlarmsPage } from '@/pages/Alarms';
+import { AnalyticsPage } from '@/pages/Analytics';
+import { ControllersPage } from '@/pages/Controllers';
 import { DashboardPage } from '@/pages/Dashboard';
 import { DeviceDetailPage } from '@/pages/DeviceDetail';
 import { DevicesPage } from '@/pages/Devices';
+import { LocationsPage } from '@/pages/Locations';
 import { LoginPage } from '@/pages/Login';
 import { SettingsPage } from '@/pages/Settings';
 import { useAuth } from '@/store/auth';
 
 function Protected({ children }: { children: ReactElement }) {
   const { isAuthenticated } = useAuth();
-  if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
-  }
-  return children;
+  return isAuthenticated ? children : <Navigate to="/login" replace />;
 }
 
 export function AppRouter() {
@@ -34,7 +34,10 @@ export function AppRouter() {
         <Route index element={<DashboardPage />} />
         <Route path="devices" element={<DevicesPage />} />
         <Route path="devices/:id" element={<DeviceDetailPage />} />
+        <Route path="controllers" element={<ControllersPage />} />
         <Route path="alarms" element={<AlarmsPage />} />
+        <Route path="analytics" element={<AnalyticsPage />} />
+        <Route path="locations" element={<LocationsPage />} />
         <Route path="settings" element={<SettingsPage />} />
       </Route>
       <Route path="*" element={<Navigate to={isAuthenticated ? '/' : '/login'} replace />} />
