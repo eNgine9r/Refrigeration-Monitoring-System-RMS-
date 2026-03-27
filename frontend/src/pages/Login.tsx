@@ -8,8 +8,8 @@ import { Card } from '@/components/ui/card';
 export function LoginPage() {
   const navigate = useNavigate();
   const { login } = useAuth();
-  const [username, setUsername] = useState('admin');
-  const [password, setPassword] = useState('admin123');
+  const [username, setUsername] = useState('demo');
+  const [password, setPassword] = useState('demo');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -31,7 +31,7 @@ export function LoginPage() {
     <div className="flex min-h-screen items-center justify-center p-4">
       <Card className="w-full max-w-md p-6">
         <h1 className="mb-1 text-2xl font-semibold">RMS Login</h1>
-        <p className="mb-6 text-sm text-slate-500">Secure access to refrigeration monitoring.</p>
+        <p className="mb-6 text-sm text-slate-500">Use demo/demo for preview mode, or your live credentials when API mode is live.</p>
         <form className="space-y-4" onSubmit={onSubmit}>
           <Input placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
           <Input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
