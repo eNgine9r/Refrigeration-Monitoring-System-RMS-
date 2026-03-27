@@ -1,0 +1,63 @@
+version: '3.9'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rms-backend
+    env_file:
+      - .env
+    ports:
+      - '8000:8000'
+    depends_on:
+      - postgres
+      - influxdb
+      - redis
+
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+    container_name: rms-frontend
+    ports:
+      - '5173:80'
+    depends_on:
+      - backend
+
+  postgres:
+    image: postgres:16
+    container_name: rms-postgres
+    environment:
+      POSTGRES_DB: rms
+      POSTGRES_USER: rms
+      POSTGRES_PASSWORD: rms
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  influxdb:
+    image: influxdb:2.7
+    container_name: rms-influxdb
+    ports:
+      - '8086:8086'
+    environment:
+      DOCKER_INFLUXDB_INIT_MODE: setup
+      DOCKER_INFLUXDB_INIT_USERNAME: admin
+      DOCKER_INFLUXDB_INIT_PASSWORD: adminadmin
+      DOCKER_INFLUXDB_INIT_ORG: rms
+      DOCKER_INFLUXDB_INIT_BUCKET: temperatures
+      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: rms-token
+    volumes:
+      - influx_data:/var/lib/influxdb2
+
+  redis:
+    image: redis:7-alpine
+    container_name: rms-redis
+    ports:
+      - '6379:6379'
+
+volumes:
+  postgres_data:
+  influx_data:
